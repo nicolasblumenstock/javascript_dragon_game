@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fight the Dragon!</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<style type="text/css" media="screen">
+		
+	</style>
+</head>
+<body>
+	<div id="game-wrapper">
+		<div class="text-center">
+			<img src="http://i3.kym-cdn.com/photos/images/newsfeed/000/029/992/trogdor.png" name="dragonImage">
+		</div>
+		<div class="text-center" id="message">You have encountered a dragon. Do you fight?</div>
+		<div class="text-center">
+			<button id="intro-fight" class="btn btn-primary" onclick="letsFight();">Fight!</button>				
+			<button id="intro-flee" class="btn btn-warning" onclick="runAway();">Flee!</button>		
+		</div>
+		<div class="text-center">
+			<button id="battle-fight" class="btn btn-danger invisible" onclick="rollDice();">Attack!</button>
+			<button id="battle-heal" class="btn btn-success invisible" onclick="healYoSelf();">Drink a Potion!</button>
+			<button id="battle-flee" class="btn btn-warning invisible" onclick="runAway();">Screw This!</button>		
+		<div class="text-center invisible" id="fight-dice">
+			<img src="dragon-assets/d1.gif" name="die1Image">
+			<img src="dragon-assets/d1.gif" name="die2Image">
+		</div>
+	</div>
+
+
+
+
+
+
+	<script type="text/javascript">
+		var gameOn = true;
+		var playerHealth = 25;
+		var dragonHealth = 50;
+		function letsFight(){
+			document.getElementById('intro-fight').className = "btn btn-primary invisible"
+			document.getElementById('intro-flee').className = "btn btn-warning invisible"
+			document.getElementById('battle-fight').className = "btn btn-danger"
+			document.getElementById('battle-heal').className = "btn btn-success"
+			document.getElementById('battle-flee').className = "btn btn-warning"
+			document.getElementById('fight-dice').className = "text-center"
+
+		}
+
+		function rollDice(){
+			// console.log("The User clicked the Fight! Button.")
+			var randomDie1 = Math.ceil(Math.random() * 6)
+			var randomDie2 = Math.ceil(Math.random() * 6)
+			var dragonDamage = Math.ceil(Math.random() * 5)
+			var die1 = "dragon-assets/d" + randomDie1 + ".gif"
+			var die2 = "dragon-assets/d" + randomDie2 + ".gif"
+			document.images.die1Image.src = die1;
+			document.images.die2Image.src = die2;
+			dragonHealth = dragonHealth - (randomDie1 + randomDie2)
+			playerHealth = playerHealth - dragonDamage
+			// if (randomDie1 + randomDie2 > 8){
+			// 	document.images.dragonImage.src = "http://orig03.deviantart.net/76f3/f/2010/321/7/5/defeated_dragon____by_chibi_machi_chan-d330vnk.jpg";
+			// 	document.getElementById('message').innerHTML = "You have defeated the Dragon."
+			// }
+			// else {
+			// 	document.images.dragonImage.src = "http://i.imgur.com/D6z0RZF.gif"
+			// 	document.getElementById('message').innerHTML = "... You Died."
+			// }	
+		}
+		function runAway(){
+			document.images.dragonImage.src = "dragon-assets/brave_sir_robin.jpg"
+			document.getElementById('message').innerHTML = "And Brave Sir Robin ran away."
+			gameOn = false;
+		}
+
+
+		
+	</script>
+</body>
+</html>
